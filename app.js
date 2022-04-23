@@ -15,7 +15,8 @@ function sleep(ms) {
 }
 
 async function arrMail(data) {
-    const arr = data.toString().replace(/\r\n/g, '\n').split('\n');
+    const arr = data.toString().replace(/\r\n/g, '\n').
+    ('\n');
 
     for (let i of arr) {
         if (i != "EmailAddress") {
@@ -131,11 +132,9 @@ async function start() {
                             console.log(`Valid Mail. Sent to Discord Webhook! Hit over ${validAm} mails!`)
                             checked = true
                             let hook = new Webhook(hooklink)
-                            let split = emailTable[i].split('@')
                             let embed = new MessageBuilder()
                                 .setTitle('Valid Account found!')
                                 .addField('Email Address', emailTable[i])
-                                .addField('Mail Box', `[Click Me](http://www.fakemailgenerator.com/#/${split[1]}/${split[0]}/)`)
                             hook.send(embed)
                             await fs.appendFile('./elements/valid_emails.txt', emailTable[i] + '\n', (err) => {
                                 if (err) throw err;
