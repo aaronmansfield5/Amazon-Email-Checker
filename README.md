@@ -1,4 +1,4 @@
-# Amazon-Email-Checker
+# Amazon Email Checker
 
 ### How To Use
 Ensure you have 'NodeJS' installed, you can download it [here](https://nodejs.org/en/).  
