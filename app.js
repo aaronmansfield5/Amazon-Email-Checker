@@ -4,8 +4,8 @@ const {
     Webhook,
     MessageBuilder
 } = require('discord-webhook-node');
-var amznLink = "https://www.amazon.com/ap/register?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3Fref_%3Dnav_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0"
-var emailTable = []
+let amznLink = "https://www.amazon.com/ap/register?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3Fref_%3Dnav_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0"
+let emailTable = []
 const setTitle = require('node-bash-title');
 setTitle('Account Checker by aaronn#4546');
 let hooklink = ""
@@ -33,7 +33,7 @@ async function start() {
     let validAm = 0
 
     await sleep(1500)
-    var data = fs.readFileSync('./elements/emails.txt', {
+    let data = fs.readFileSync('./elements/emails.txt', {
         encoding: 'utf8',
         flag: 'r'
     });
@@ -78,14 +78,14 @@ async function start() {
     }
 
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         ignoreHTTPSErrors: true
     });
     browser.currentPage = async function (browser, timeout) {
-        var start = new Date().getTime();
+        let start = new Date().getTime();
         while (new Date().getTime() - start < timeout) {
-            var pages = await browser.pages();
-            var arr = [];
+            let pages = await browser.pages();
+            let arr = [];
             for (const p of pages) {
                 if (await p.evaluate(() => {
                         return document.visibilityState == 'visible'
@@ -97,7 +97,7 @@ async function start() {
         }
         throw "Unable to get active page";
     }
-    var page = await browser.currentPage(browser, 1000, (err) => {
+    let page = await browser.currentPage(browser, 1000, (err) => {
         if (err) throw err;
     });
     await page.setUserAgent('Mozilla/5.0 (Linux; U; Android 4.4.2; en-US; HM NOTE 1W Build/KOT49H) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 UCBrowser/11.0.5.850 U3/0.8.0 Mobile Safari/534.30')
