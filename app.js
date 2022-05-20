@@ -15,8 +15,7 @@ function sleep(ms) {
 }
 
 async function arrMail(data) {
-    const arr = data.toString().replace(/\r\n/g, '\n').
-    ('\n');
+    const arr = data.toString().replace(/\r\n/g, '\n')
 
     for (let i of arr) {
         if (i != "EmailAddress") {
